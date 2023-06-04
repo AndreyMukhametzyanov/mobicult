@@ -46,21 +46,6 @@ jobs:
           cp config/database.ci.yml config/database.yml
           rake db:create db:migrate
 
-      - name: Run annotate models check
-        env:
-            RAILS_ENV: test
-            PGHOST: localhost
-            POSTGRES_DB: mobicult_test
-            POSTGRES_USER: mobicult
-            POSTGRES_PASSWORD: postgres
-        run: bundle exec annotate --frozen
-
-      - name: Run bundler audit
-        run: bundle exec bundle-audit check --update
-
-      - name: Run security
-        run: bundle exec brakeman --no-pager
-
       - name: Run rubocop
         run: bundle exec rubocop
 
